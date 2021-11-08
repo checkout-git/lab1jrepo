@@ -1,0 +1,16 @@
+- name: Create Azure VM
+  hosts: localhost
+  connection: local
+  tasks:
+  - name: Create VM with defaults
+    azure_rm_virtualmachine:
+      resource_group: lab1-task-RG
+      name: ansivm
+      vm_size: Standard_A1_v2
+      admin_username: vmadmin
+      admin_password: Password@1234
+      image:
+        offer: UbuntuServer
+        publisher: Canonical
+        sku: 18.04-LTS
+        version: latest
