@@ -1,9 +1,8 @@
 #!/bin/bash
-echo "copying ansiblevm host to ansible server inventory"
-ssh vmadmin@ansivm.lab1.com 'echo -e "[ansivm]\n$(curl -4 icanhazip.com)"' >> /etc/ansible/hosts
-if [ $? == 0]
-then
-        echo "copied success"
-else
-        echo "copied failed"
-fi
+
+ANSIVM_IP=$(az vm show -d -g lab1-task-RG -n ansivm --query publicIps -o tsv)
+echo "ANSIVM_IP -> $ANSIVM_IP"
+echo -e "[ansivm]\n$ANSIVM_IP"
+
+echo -e "[ansivm]\n$ANSIVM_IP" >> /etc/ansible/hosts
+
